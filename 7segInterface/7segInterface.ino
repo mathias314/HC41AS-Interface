@@ -1,10 +1,11 @@
 // Mathew Clutter
 // AVR ATMega 2560 @16MHz
 // 7 segment display interfacing
-// displays 0-9 on the 7 seg display
+// displays 4 digit number on 4 digit 7 seg display
 
 // connect the segments to PORTA in order (segment A to pin 0, etc)
-// common anode on PORTC (if high, screen is active, if low, screen is off)
+// decimal point can be connected to 5v (it is not used in this program)
+// anodes on PORTC (if high, screen is active, if low, screen is off)
 // C0 is leftmost display, C3 is rightmost display
 
 #include <avr/io.h>
@@ -69,6 +70,6 @@ int main()
 
   while(1)
   {
-    writeNum(4593); // need to call the writeNum function quickly for display to work right...
+    writeNum(4593); // need to call the writeNum function quickly for display to work right
   }
 }
