@@ -1,7 +1,7 @@
 // Mathew Clutter
 // AVR ATMega 2560 @16MHz
 // 7 segment display interfacing
-// displays 4 digit number on 4 digit 7 seg display
+// displays number on 4 digit 7 seg display
 
 // connect the segments to PORTA in order (segment A to pin 0, etc)
 // decimal point can be connected to 5v (it is not used in this program)
@@ -10,6 +10,8 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+
+void writeNum(unsigned int);
 
 unsigned char displayArray[10];
 
@@ -25,7 +27,7 @@ void writeNum(unsigned int num)
   currDig = num % 10;
   num = num / 10;
   PORTC = 0x01;
-  PORTA = ~displayArray[currDig];
+  PORTA = ~displayArray[currDig]; // write least significatn digit (rightmost)
   _delay_ms(1);
 
   currDig = num % 10;
@@ -43,7 +45,7 @@ void writeNum(unsigned int num)
   currDig = num % 10;
   num = num / 10;
   PORTC = 0x08;
-  PORTA = ~displayArray[currDig];
+  PORTA = ~displayArray[currDig]; // write most significant digit (leftmost)
   _delay_ms(1);
 
   return;
