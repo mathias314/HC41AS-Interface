@@ -17,36 +17,36 @@ unsigned char displayArray[10];
 
 void writeNum(unsigned int num)
 {
-  if(num > 9999)
+  if (num > 9999)
   {
     return;
   }
 
   int currDig;
-  
+
   currDig = num % 10;
   num = num / 10;
   PORTC = 0x01;
   PORTA = ~displayArray[currDig]; // write least significatn digit (rightmost)
-  _delay_ms(1);
+  _delay_us(500);
 
   currDig = num % 10;
   num = num / 10;
   PORTC = 0x02;
   PORTA = ~displayArray[currDig];
-  _delay_ms(1);
+  _delay_us(500);
 
   currDig = num % 10;
   num = num / 10;
   PORTC = 0x04;
   PORTA = ~displayArray[currDig];
-  _delay_ms(1);
+  _delay_us(500);
 
   currDig = num % 10;
   num = num / 10;
   PORTC = 0x08;
   PORTA = ~displayArray[currDig]; // write most significant digit (leftmost)
-  _delay_ms(1);
+  _delay_us(500);
 
   return;
 }
@@ -67,11 +67,11 @@ int main()
   DDRA = 0xFF;
   PORTA = 0x00;
 
-  DDRC = 0xFF; 
+  DDRC = 0xFF;
   PORTC = 0xFF;
 
-  while(1)
+  while (1)
   {
-    writeNum(4593); // need to call the writeNum function quickly for display to work right
+    writeNum(1234); // need to call the writeNum function quickly for display to work right
   }
 }
